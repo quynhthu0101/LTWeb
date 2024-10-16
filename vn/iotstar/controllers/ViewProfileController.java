@@ -26,7 +26,7 @@ public class ViewProfileController extends HttpServlet{
 
         // Sử dụng UserService để lấy thông tin người dùng từ cơ sở dữ liệu
         UserService service = new UserServiceImpl();
-        User user = service.findByUserName(u.getUserName()); // Giả định bạn có phương thức này để lấy thông tin người dùng
+        User user = service.findByUserName(u.getUserName()); 
 
         if (user != null) {
         	req.setAttribute("usename", u.getFullName());
@@ -34,10 +34,9 @@ public class ViewProfileController extends HttpServlet{
         	 String avatarFileName = u.getAvatar();
         	 String avatarPath = req.getContextPath() + "/uploads/avatars/" + avatarFileName;
         	 req.setAttribute("avatar", avatarPath);
-            // Chuyển hướng đến trang profile.jsp
+           
             req.getRequestDispatcher("/views/profile.jsp").forward(req, resp);
         } else {
-            // Nếu không tìm thấy người dùng, chuyển hướng đến trang lỗi hoặc login
             resp.sendRedirect(req.getContextPath() + "/login");
         }
 	}
